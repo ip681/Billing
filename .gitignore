@@ -2,3 +2,5 @@
 Thumbs.db
 *.swp
 CLAUDE.md
+.env
+.env.production
