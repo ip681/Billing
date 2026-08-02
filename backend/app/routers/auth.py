@@ -1,10 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.auth import create_access_token, get_current_user, verify_password
+from app.auth import create_access_token, get_current_user, hash_password, verify_password
 from app.db import get_db
 from app.models.user import User
-from app.schemas.auth import AuthResponse, LoginRequest, MeResponse, RegisterRequest
+from app.schemas.auth import (
+    AuthResponse,
+    ChangePasswordRequest,
+    LoginRequest,
+    MeResponse,
+    RegisterRequest,
+)
 from app.services import company as company_service
 from app.services import user as user_service
 
@@ -40,3 +46,15 @@ def me(current_user: User = Depends(get_current_user), db: Session = Depends(get
     if current_user.company_id is not None:
         company = company_service.get_company(db, current_user.company_id)
     return MeResponse(user=current_user, company=company)
+
+
+@router.post("/change-password", status_code=204)
+def change_password(
+    data: ChangePasswordRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    if not verify_password(data.current_password, current_user.hashed_password):
+        raise HTTPException(status_code=400, detail="Текущата парола е грешна.")
+    current_user.hashed_password = hash_password(data.new_password)
+    db.commit()

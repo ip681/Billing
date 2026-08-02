@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { AuthProvider, useAuth } from './auth/AuthContext'
+import AccountPage from './pages/AccountPage'
 import CompanySettingsPage from './pages/CompanySettingsPage'
 import CounterpartiesPage from './pages/CounterpartiesPage'
 import CreateCompanyPage from './pages/CreateCompanyPage'
@@ -10,7 +11,7 @@ import RegisterPage from './pages/RegisterPage'
 import ReportsPage from './pages/ReportsPage'
 import './App.css'
 
-type Page = 'settings' | 'counterparties' | 'products' | 'invoices' | 'reports'
+type Page = 'settings' | 'counterparties' | 'products' | 'invoices' | 'reports' | 'account'
 
 const NAV_ITEMS: { key: Page; label: string }[] = [
   { key: 'invoices', label: 'Фактури' },
@@ -18,6 +19,7 @@ const NAV_ITEMS: { key: Page; label: string }[] = [
   { key: 'settings', label: 'Настройки на фирмата' },
   { key: 'counterparties', label: 'Контрагенти' },
   { key: 'products', label: 'Продукти' },
+  { key: 'account', label: 'Акаунт' },
 ]
 
 function AuthGate() {
@@ -72,6 +74,7 @@ function AuthGate() {
         {page === 'products' && <ProductsPage />}
         {page === 'invoices' && <InvoicesPage />}
         {page === 'reports' && <ReportsPage />}
+        {page === 'account' && <AccountPage />}
       </main>
     </>
   )

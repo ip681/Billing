@@ -33,3 +33,15 @@ export async function getMe(): Promise<MeResponse> {
   const response = await authFetch('/api/auth/me')
   return handleResponse(response)
 }
+
+export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+  const response = await authFetch('/api/auth/change-password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+  })
+  if (!response.ok) {
+    const error = await response.json().catch(() => null)
+    throw new Error(error?.detail ?? `Request failed: ${response.status}`)
+  }
+}
