@@ -84,6 +84,7 @@ label {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
   font-size: 13px;
   color: var(--text);
 }
@@ -97,6 +98,7 @@ select {
   background: var(--bg);
   color: var(--text-h);
   min-width: 0;
+  max-width: 100%;
 }
 
 label:has(input[type='checkbox']) {
@@ -138,6 +140,18 @@ button.btn-danger {
 
 button.btn-danger:hover {
   background: var(--danger-bg);
+}
+
+.theme-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.theme-toggle button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+  font-weight: 600;
 }
 
 /* Tables */

@@ -280,6 +280,7 @@ function InvoicesPage() {
         {invoices.length === 0 ? (
           <p className="muted">Няма издадени фактури.</p>
         ) : (
+          <div className="table-wrap">
           <table>
             <thead>
               <tr>
@@ -310,6 +311,7 @@ function InvoicesPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
 
@@ -339,6 +341,7 @@ function InvoicesPage() {
             <br />
             {selectedInvoice.counterparty_address}
           </p>
+          <div className="table-wrap">
           <table>
             <thead>
               <tr>
@@ -363,6 +366,7 @@ function InvoicesPage() {
               ))}
             </tbody>
           </table>
+          </div>
           {!selectedInvoice.company_is_vat_registered && selectedInvoice.company_vat_exempt_reason && (
             <p>{selectedInvoice.company_vat_exempt_reason}</p>
           )}

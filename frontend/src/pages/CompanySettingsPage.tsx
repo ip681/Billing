@@ -256,6 +256,7 @@ function CompanySettingsPage() {
         {members.length === 0 ? (
           <p className="muted">Зареждане...</p>
         ) : (
+          <div className="table-wrap">
           <table>
             <thead>
               <tr>
@@ -288,6 +289,7 @@ function CompanySettingsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
 
         {isOwner ? (

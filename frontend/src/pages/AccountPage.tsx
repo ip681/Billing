@@ -1,15 +1,22 @@
 import { useState } from 'react'
 import { changePassword } from '../api/auth'
 import { useAuth } from '../auth/AuthContext'
+import { applyTheme, getStoredTheme, type Theme } from '../theme'
 
 function AccountPage() {
   const { user, company } = useAuth()
+  const [theme, setTheme] = useState<Theme>(getStoredTheme())
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [saving, setSaving] = useState(false)
+
+  function handleThemeChange(next: Theme) {
+    setTheme(next)
+    applyTheme(next)
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -51,6 +58,33 @@ function AccountPage() {
             <br />
             Фирма: {company?.name ?? '—'}
           </p>
+        </div>
+      </div>
+
+      <div className="card">
+        <h2>Изглед</h2>
+        <div className="theme-toggle">
+          <button
+            type="button"
+            className={theme === 'light' ? 'active' : ''}
+            onClick={() => handleThemeChange('light')}
+          >
+            Светла
+          </button>
+          <button
+            type="button"
+            className={theme === 'dark' ? 'active' : ''}
+            onClick={() => handleThemeChange('dark')}
+          >
+            Тъмна
+          </button>
+          <button
+            type="button"
+            className={theme === 'system' ? 'active' : ''}
+            onClick={() => handleThemeChange('system')}
+          >
+            Системна
+          </button>
         </div>
       </div>
 
