@@ -98,12 +98,7 @@ def build_invoice_pdf(invoice: Invoice, logo_path: str | None = None) -> bytes:
         [Paragraph("Доставчик", bold_style), Paragraph("Получател", bold_style)],
         [
             Paragraph(
-                f"{invoice.company_name}<br/>ЕИК: {invoice.company_eik}<br/>{invoice.company_address}"
-                + (
-                    f"<br/>{invoice.company_vat_exempt_reason}"
-                    if not invoice.company_is_vat_registered and invoice.company_vat_exempt_reason
-                    else ""
-                ),
+                f"{invoice.company_name}<br/>ЕИК: {invoice.company_eik}<br/>{invoice.company_address}",
                 normal_style,
             ),
             Paragraph(
@@ -154,6 +149,10 @@ def build_invoice_pdf(invoice: Invoice, logo_path: str | None = None) -> bytes:
     )
     elements.append(items_table)
     elements.append(Spacer(1, 12))
+
+    if not invoice.company_is_vat_registered and invoice.company_vat_exempt_reason:
+        elements.append(Paragraph(invoice.company_vat_exempt_reason, normal_style))
+        elements.append(Spacer(1, 12))
 
     totals_data = [
         ["Данъчна основа:", f"{invoice.subtotal} лв."],

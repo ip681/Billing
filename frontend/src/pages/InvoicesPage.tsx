@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { listCounterparties } from '../api/counterparties'
-import { createInvoice, getInvoice, listInvoices, openInvoicePdf } from '../api/invoices'
+import { createInvoice, downloadInvoicePdf, getInvoice, listInvoices } from '../api/invoices'
 import { listProducts } from '../api/products'
 import type { Counterparty } from '../types/counterparty'
 import type { Invoice, InvoiceListItem } from '../types/invoice'
@@ -321,7 +321,7 @@ function InvoicesPage() {
               href="#"
               onClick={(e) => {
                 e.preventDefault()
-                openInvoicePdf(selectedInvoice.id)
+                downloadInvoicePdf(selectedInvoice.id, selectedInvoice.invoice_number)
               }}
             >
               (PDF)
@@ -332,12 +332,6 @@ function InvoicesPage() {
             {selectedInvoice.company_eik})
             <br />
             {selectedInvoice.company_address}
-            {!selectedInvoice.company_is_vat_registered && (
-              <>
-                <br />
-                {selectedInvoice.company_vat_exempt_reason}
-              </>
-            )}
           </p>
           <p>
             <strong>Получател:</strong> {selectedInvoice.counterparty_name} (ЕИК{' '}
@@ -369,6 +363,9 @@ function InvoicesPage() {
               ))}
             </tbody>
           </table>
+          {!selectedInvoice.company_is_vat_registered && selectedInvoice.company_vat_exempt_reason && (
+            <p>{selectedInvoice.company_vat_exempt_reason}</p>
+          )}
           <p>
             Данъчна основа: {selectedInvoice.subtotal} лв.
             <br />
