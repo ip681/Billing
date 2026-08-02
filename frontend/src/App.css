@@ -85,6 +85,7 @@ select {
   border-radius: 6px;
   background: var(--bg);
   color: var(--text-h);
+  min-width: 0;
 }
 
 label:has(input[type='checkbox']) {
@@ -153,12 +154,34 @@ th {
 
 table.line-items {
   margin: 4px 0;
+  table-layout: fixed;
 }
 
 table.line-items th,
 table.line-items td {
   border: none;
   padding: 4px 6px 4px 0;
+}
+
+table.line-items th:first-child,
+table.line-items td:first-child {
+  width: 65%;
+}
+
+table.line-items th:nth-child(2),
+table.line-items td:nth-child(2) {
+  width: 20%;
+}
+
+table.line-items th:last-child,
+table.line-items td:last-child {
+  width: 15%;
+}
+
+table.line-items select,
+table.line-items input {
+  width: 100%;
+  max-width: 100%;
 }
 
 table td button {

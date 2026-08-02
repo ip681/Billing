@@ -67,6 +67,7 @@ def build_invoice_pdf(invoice: Invoice, logo_path: str | None = None) -> bytes:
     title_style = ParagraphStyle("Title", fontName="Invoice-Bold", fontSize=18, spaceAfter=12)
     normal_style = ParagraphStyle("Normal", fontName="Invoice", fontSize=10, leading=14)
     bold_style = ParagraphStyle("Bold", fontName="Invoice-Bold", fontSize=10, leading=14)
+    cell_style = ParagraphStyle("Cell", fontName="Invoice", fontSize=9, leading=11)
 
     elements = []
 
@@ -126,7 +127,7 @@ def build_invoice_pdf(invoice: Invoice, logo_path: str | None = None) -> bytes:
     for item in invoice.items:
         items_rows.append(
             [
-                f"{item.product_name} ({item.product_unit})",
+                Paragraph(f"{item.product_name} ({item.product_unit})", cell_style),
                 str(item.quantity),
                 str(item.product_unit_price),
                 str(item.product_vat_rate) if item.product_vat_rate is not None else "—",
@@ -144,6 +145,7 @@ def build_invoice_pdf(invoice: Invoice, logo_path: str | None = None) -> bytes:
                 ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
                 ("BACKGROUND", (0, 0), (-1, 0), colors.whitesmoke),
                 ("ALIGN", (1, 0), (-1, -1), "RIGHT"),
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
             ]
         )
     )
