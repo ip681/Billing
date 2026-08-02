@@ -8,7 +8,6 @@ const emptyCompany: CompanyInput = {
   address: '',
   is_vat_registered: false,
   vat_exempt_reason: '',
-  invoice_number_prefix: '',
 }
 
 function RegisterPage({ onSwitchToLogin }: { onSwitchToLogin: () => void }) {
@@ -127,15 +126,6 @@ function RegisterPage({ onSwitchToLogin }: { onSwitchToLogin: () => void }) {
                   />
                 </label>
               )}
-              <label>
-                Префикс на номер на фактура
-                <input
-                  value={company.invoice_number_prefix ?? ''}
-                  onChange={(e) =>
-                    setCompany({ ...company, invoice_number_prefix: e.target.value })
-                  }
-                />
-              </label>
             </>
           ) : (
             <p className="muted">

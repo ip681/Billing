@@ -9,7 +9,6 @@ class CompanyCreate(BaseModel):
     address: str
     is_vat_registered: bool
     vat_exempt_reason: str | None = None
-    invoice_number_prefix: str | None = None
 
     @model_validator(mode="after")
     def check_vat_exempt_reason(self) -> "CompanyCreate":
@@ -33,7 +32,6 @@ class CompanyRead(BaseModel):
     address: str
     is_vat_registered: bool
     vat_exempt_reason: str | None
-    invoice_number_prefix: str | None
     logo_filename: str | None
     next_invoice_number: int
     created_at: datetime

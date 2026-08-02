@@ -19,7 +19,6 @@ const emptyForm: CompanyInput = {
   address: '',
   is_vat_registered: false,
   vat_exempt_reason: '',
-  invoice_number_prefix: '',
 }
 
 function CompanySettingsPage() {
@@ -55,7 +54,6 @@ function CompanySettingsPage() {
           address: company.address,
           is_vat_registered: company.is_vat_registered,
           vat_exempt_reason: company.vat_exempt_reason ?? '',
-          invoice_number_prefix: company.invoice_number_prefix ?? '',
         })
         setLogoFilename(company.logo_filename)
       })
@@ -73,7 +71,6 @@ function CompanySettingsPage() {
       const saved = await updateCompany({
         ...form,
         vat_exempt_reason: form.vat_exempt_reason || null,
-        invoice_number_prefix: form.invoice_number_prefix || null,
       })
       setSavedAt(saved.updated_at)
     } catch (err) {
@@ -244,16 +241,6 @@ function CompanySettingsPage() {
               />
             </label>
           )}
-
-          <label>
-            Префикс на номер на фактура
-            <input
-              value={form.invoice_number_prefix ?? ''}
-              onChange={(e) =>
-                setForm({ ...form, invoice_number_prefix: e.target.value })
-              }
-            />
-          </label>
 
           <button type="submit" disabled={saving}>
             {saving ? 'Запазване...' : 'Запази'}

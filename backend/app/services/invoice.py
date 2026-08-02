@@ -102,7 +102,7 @@ def create_invoice(db: Session, company_id: int, data: InvoiceCreate) -> Invoice
         subtotal += line_subtotal
         vat_amount += line_vat
 
-    invoice_number = f"{settings.invoice_number_prefix or ''}{settings.next_invoice_number}"
+    invoice_number = f"{settings.next_invoice_number:010d}"
 
     invoice = Invoice(
         company_id=company_id,

@@ -17,7 +17,6 @@ class Company(Base):
         Boolean, nullable=False, default=False
     )
     vat_exempt_reason: Mapped[str | None] = mapped_column(String, nullable=True)
-    invoice_number_prefix: Mapped[str | None] = mapped_column(String, nullable=True)
     logo_filename: Mapped[str | None] = mapped_column(String, nullable=True)
     next_invoice_number: Mapped[int] = mapped_column(
         Integer, nullable=False, default=1

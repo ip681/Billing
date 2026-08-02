@@ -9,7 +9,6 @@ const emptyForm: CompanyInput = {
   address: '',
   is_vat_registered: false,
   vat_exempt_reason: '',
-  invoice_number_prefix: '',
 }
 
 function CreateCompanyPage() {
@@ -83,15 +82,6 @@ function CreateCompanyPage() {
               />
             </label>
           )}
-          <label>
-            Префикс на номер на фактура
-            <input
-              value={form.invoice_number_prefix ?? ''}
-              onChange={(e) =>
-                setForm({ ...form, invoice_number_prefix: e.target.value })
-              }
-            />
-          </label>
           <div className="actions">
             <button type="submit" disabled={saving}>
               {saving ? 'Създаване...' : 'Създай фирма'}

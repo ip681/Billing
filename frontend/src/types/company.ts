@@ -5,7 +5,6 @@ export interface Company {
   address: string
   is_vat_registered: boolean
   vat_exempt_reason: string | null
-  invoice_number_prefix: string | null
   logo_filename: string | null
   next_invoice_number: number
   created_at: string
@@ -18,7 +17,6 @@ export interface CompanyInput {
   address: string
   is_vat_registered: boolean
   vat_exempt_reason: string | null
-  invoice_number_prefix: string | null
 }
 
 export interface CompanyMember {
