@@ -177,6 +177,7 @@ function CounterpartiesPage() {
         ) : counterparties.length === 0 ? (
           <p className="muted">Няма добавени контрагенти.</p>
         ) : (
+          <div className="table-wrap">
           <table>
             <thead>
               <tr>
@@ -212,6 +213,7 @@ function CounterpartiesPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </section>

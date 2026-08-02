@@ -133,6 +133,7 @@ function ProductsPage() {
         ) : products.length === 0 ? (
           <p className="muted">Няма добавени продукти.</p>
         ) : (
+          <div className="table-wrap">
           <table>
             <thead>
               <tr>
@@ -166,6 +167,7 @@ function ProductsPage() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </section>

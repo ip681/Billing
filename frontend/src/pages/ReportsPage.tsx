@@ -57,6 +57,7 @@ function ReportsPage() {
             {byPeriod.length === 0 ? (
               <p className="muted">Няма данни за избрания период.</p>
             ) : (
+              <div className="table-wrap">
               <table>
                 <thead>
                   <tr>
@@ -75,6 +76,7 @@ function ReportsPage() {
                   ))}
                 </tbody>
               </table>
+              </div>
             )}
           </div>
 
@@ -83,6 +85,7 @@ function ReportsPage() {
             {byCounterparty.length === 0 ? (
               <p className="muted">Няма данни за избрания период.</p>
             ) : (
+              <div className="table-wrap">
               <table>
                 <thead>
                   <tr>
@@ -101,6 +104,7 @@ function ReportsPage() {
                   ))}
                 </tbody>
               </table>
+              </div>
             )}
           </div>
         </>
